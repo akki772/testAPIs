@@ -15,16 +15,17 @@ Login to get a **Bearer token**, send any JSON payload to `/api/echo`, and get t
 ---
 
 ## 📂 Project Structure
+```
 testapi-echo/
-├── backend/ # Express + TypeScript API
-│ ├── src/ # routes, middleware, utils
-│ ├── .env.example
-│ └── openapi.yaml
-├── frontend/ # Vite + React landing page
-│ ├── src/
-│ └── .env.example
-└── README.md
-
+ ├── backend/ # Express + TypeScript API
+ │ ├── src/ # routes, middleware, utils
+ │ ├── .env.example
+ │ └── openapi.yaml
+ ├── frontend/ # Vite + React landing page
+ │ ├── src/
+ │ └── .env.example
+ └── README.md
+```
 
 
 
@@ -52,17 +53,13 @@ npm run dev            # http://localhost:5173
 
 ## 🔧 Usage Flow
 
-Register a user → POST /auth/register
+1. Register a user → POST /auth/register
 
-Login → POST /auth/login → receive JWT
+2. Login → POST /auth/login → receive JWT
 
-Echo → POST /api/echo with header
-
+3. Echo → POST /api/echo with header
 ```Authorization: Bearer <token>```
-
-
 and any JSON body.
-
 Receive same payload + metadata.
 
 
@@ -90,13 +87,13 @@ curl -sX POST http://localhost:3000/api/echo \
 
 # 📖 API Reference (Core)
 
-`POST /auth/register → create user`
+1. `POST /auth/register → create user`
 
-`POST /auth/login → get bearer token`
+2. `POST /auth/login → get bearer token`
 
-`POST /api/echo → echoes payload (requires token)`
+3. `POST /api/echo → echoes payload (requires token)`
 
-`GET /api/health → service status`
+4. `GET /api/health → service status`
 
 More utilities coming soon (`/status/:code`, `/delay/:ms`, `/headers`, etc.).
 ---
