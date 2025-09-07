@@ -1,0 +1,69 @@
+openapi: 3.0.3
+info:
+  title: TestAPI Echo
+  version: 0.1.0
+paths:
+  /auth/register:
+    post:
+      summary: Register a user (demo only)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+              required: [email, password]
+      responses:
+        '201': { description: created }
+  /auth/login:
+    post:
+      summary: Login and receive a bearer token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+              required: [email, password]
+      responses:
+        '200':
+          description: token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token: { type: string }
+  /api/echo:
+    post:
+      summary: Echo back the posted payload (protected)
+      security: [{ bearerAuth: [] }]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: echoed payload
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok: { type: boolean }
+                  tokenSubject: { type: string, nullable: true }
+                  payload: { type: object }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
